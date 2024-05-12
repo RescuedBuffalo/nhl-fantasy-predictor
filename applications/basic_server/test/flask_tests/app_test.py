@@ -1,6 +1,6 @@
 import pytest
 from flask_testing import TestCase
-from basic_server.src.main.flask_app.app import app
+from applications.basic_server.main.flask_app.basic_server_app import app
 
 # AppTest.py
 
