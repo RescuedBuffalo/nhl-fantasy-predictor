@@ -1,1 +1,1 @@
-web: gunicorn applications.basic-server.src.main.flask-app.app:app
+web: gunicorn applications.basic_server.main.flask_app.basic_server_app:app
