@@ -40,7 +40,7 @@ jobs:
         echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        
+
     - name: Build and push frontend
       run: |
         cd applications/basic_server
@@ -54,12 +54,12 @@ jobs:
 
     - name: Build and push collector
       run: |
-        cd applications/data_collection_app
+        cd applications/data_collection_server
         docker build -t registry.heroku.com/collector-nhl-fantasy/web .
         docker push registry.heroku.com/collector-nhl-fantasy/web
 
     - name: Release collector
       run: |
-        cd applications/data_collection_app
+        cd applications/data_collection_server
         heroku container:release web -a collector-nhl-fantasy
 
