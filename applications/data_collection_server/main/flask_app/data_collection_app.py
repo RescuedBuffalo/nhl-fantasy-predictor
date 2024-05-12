@@ -23,7 +23,7 @@ def db_connection():
     return conn
 
 @app.route('/')
-def index():
+def ind():
     return render_template('index.html')
 
 @app.route('/leaders', methods=['GET'])
