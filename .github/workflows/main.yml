@@ -29,7 +29,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    environment: nhl-fantasy-predictor
+    environment: actions
 
     steps:
     - uses: actions/checkout@v2
@@ -46,7 +46,7 @@ jobs:
 
     - uses: akhileshns/heroku-deploy@v3.13.15
       with:
-        heroku_api_key: HRKU-14279615-9f00-4349-b392-46c74ab55b75
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "nhl-fantasy-predictor"
-        heroku_email: "aidan.kosik@colorado.edu"
+        heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
