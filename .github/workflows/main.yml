@@ -28,15 +28,9 @@ jobs:
         pytest
 
   deploy:
-    needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.12
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.12
 
     - name: Install dependencies
       run: |
@@ -44,15 +38,23 @@ jobs:
         pip install gunicorn
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Set up Heroku CLI
+    
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+
+    - name: Authenticate Heroku CLI
       run: heroku authorizations:create
       env:
-       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-    - name: Deploy to Heroku
+    - name: Add Heroku Git Remote
       run: |
         heroku git:remote -a nhl-fantasy-predictor
-        git push heroku HEAD:main --force
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-  
+
+    - name: Push to Heroku
+      run: git push heroku HEAD:main --force
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
