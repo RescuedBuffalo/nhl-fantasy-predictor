@@ -29,6 +29,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    environment: nhl-fantasy-predictor
+
     steps:
     - uses: actions/checkout@v2
 
