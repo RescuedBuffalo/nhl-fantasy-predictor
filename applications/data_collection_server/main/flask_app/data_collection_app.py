@@ -1,13 +1,13 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, redirect, url_for, render_template
 import requests
 
 app = Flask(__name__)
 
-@app.route('/leaders')
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/fetch_nhl_leaders', methods=['GET'])
+@app.route('/leaders', methods=['GET'])
 def fetch_nhl_leaders():
     url = 'https://api-web.nhle.com/v1/skater-stats-leaders/current'
     try:
