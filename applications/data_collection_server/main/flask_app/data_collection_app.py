@@ -63,4 +63,4 @@ def fetch_nhl_leaders():
         return jsonify({"success": False, "message": "Failed to fetch data"}), 500
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port)
