@@ -55,6 +55,7 @@ jobs:
         heroku container:release web -a basic-server-nhl-fantasy
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: aidan.kosik@colorado.edu
 
     - name: Build and push collector
       run: |
@@ -70,4 +71,5 @@ jobs:
         heroku container:release web -a collector-nhl-fantasy
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        HEROKU_EMAIL: aidan.kosik@colorado.edu
 
