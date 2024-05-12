@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, redirect, url_for, render_template
-import requests, json, sqlite3
+import requests, json, sqlite3, os
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def db_connection():
     return conn
 
 @app.route('/')
-def index():
+def ind():
     return render_template('index.html')
 
 @app.route('/leaders', methods=['GET'])
@@ -63,4 +63,5 @@ def fetch_nhl_leaders():
         return jsonify({"success": False, "message": "Failed to fetch data"}), 500
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
