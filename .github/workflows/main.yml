@@ -45,8 +45,6 @@ jobs:
         curl https://cli-assets.heroku.com/install.sh | sh
 
     - name: Set up Heroku CLI to use the API key
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
         heroku config:set HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} --app nhl-fantasy-predictor
         git config --global user.email "aidan.kosik@colorado.edu"
