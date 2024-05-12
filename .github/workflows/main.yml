@@ -44,22 +44,30 @@ jobs:
     - name: Build and push frontend
       run: |
         cd applications/basic_server
-        docker build -t registry.heroku.com/basic-server-nhl-fantasy/web .
+        docker build -t registry.heroku.com/basic-server-nhl-fantasy/web . --platform linux/amd64
         docker push registry.heroku.com/basic-server-nhl-fantasy/web
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     
     - name: Release frontend
       run: |
         cd applications/basic_server
         heroku container:release web -a basic-server-nhl-fantasy
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     - name: Build and push collector
       run: |
         cd applications/data_collection_server
-        docker build -t registry.heroku.com/collector-nhl-fantasy/web .
+        docker build -t registry.heroku.com/collector-nhl-fantasy/web . --platform linux/amd64
         docker push registry.heroku.com/collector-nhl-fantasy/web
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
     - name: Release collector
       run: |
         cd applications/data_collection_server
         heroku container:release web -a collector-nhl-fantasy
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
