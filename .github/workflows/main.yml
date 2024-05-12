@@ -44,16 +44,9 @@ jobs:
       run: |
         curl https://cli-assets.heroku.com/install.sh | sh
 
-    - name: Set up Heroku CLI to use the API key
-      run: |
-        heroku config:set HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} --app nhl-fantasy-predictor
-        git config --global user.email "aidan.kosik@colorado.edu"
-        git config --global user.name "Aidan Kosik"
-        heroku git:remote -a nhl-fantasy-predictor
-
-    - name: Push to Heroku
-      run: |
-        git push heroku HEAD:main --force
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+    - uses: akhileshns/heroku-deploy@v3.13.15
+      with:
+        heroku_api_key: HRKU-14279615-9f00-4349-b392-46c74ab55b75
+        heroku_app_name: "nhl-fantasy-predictor"
+        heroku_email: "aidan.kosik@colorado.edu"
 
