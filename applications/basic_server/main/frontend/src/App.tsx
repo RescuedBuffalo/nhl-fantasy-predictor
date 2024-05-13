@@ -3,6 +3,7 @@ import './App.css';
 import DataTable from './DataTable';
 import { PlayerDetails } from './types';
 
+
 const App = () => {
   const [data, setData] = useState<{[key: string]: PlayerDetails}>({});
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,8 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('https://collector-nhl-fantasy-481b97d2ae29.herokuapp.com/fetch_nhl_goal_leaders');
+      const baseUrl = process.env.REACT_APP_DATA_COLLECTION_SERVER;
+      const response = await fetch(`${baseUrl}/fetch_nhl_goal_leaders`);
       const jsonData = await response.json();
       setData(jsonData);
       setError('');
