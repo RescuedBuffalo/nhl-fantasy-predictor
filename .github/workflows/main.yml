@@ -26,6 +26,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        cd applications/basic_server
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         cd applications/basic_server/main/frontend
@@ -50,6 +51,20 @@ jobs:
         echo $HEROKU_API_KEY | docker login --username=_ --password-stdin registry.heroku.com
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        cd applications/basic_server
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        cd applications/basic_server/main/frontend
+        npm install
+        npm run build
 
     - name: Build and push frontend
       run: |
