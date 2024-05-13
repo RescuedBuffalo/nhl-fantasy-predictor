@@ -17,7 +17,7 @@ def fetch_nhl_goal_leaders():
         data = response.json()
         
         # Create a json object to be returned to the client
-        player_data = []
+        player_data = {}
 
         for player in data['goals']:
             player_id = player['id']
@@ -25,12 +25,12 @@ def fetch_nhl_goal_leaders():
             position = player['position']
             team = player['teamName']['default']
             goals = player['value']
-            player_data.append({'player_id': player_id, 'player_name': player_name, 'position': position, 'team': team, 'goals': goals})
+            player_data[str(player_id)] = {'player_name': player_name, 'position': position, 'team': team, 'goals': goals}
 
-
-        return player_data, 200
+        return jsonify(player_data), 200
+    
     else:
-        return [], 500
+        return {}, 500
     
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5001))

@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import './App.css';
 import DataTable from './DataTable';
+import { PlayerDetails } from './types';
 
 const App = () => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<{[key: string]: PlayerDetails}>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8000/data');
+      const response = await fetch('http://127.0.0.1:5001/fetch_nhl_goal_leaders');
       const jsonData = await response.json();
       setData(jsonData);
       setError('');
     } catch (err) {
-      setError('Failed to fetch data');
-      setData([]);
+      setError('Failed to fetch data.');
+      setData({});
     } finally {
       setLoading(false);
-    };
+    }
+  };  // This semicolon here ends the definition of fetchData function
 
   return (
     <div className="App">

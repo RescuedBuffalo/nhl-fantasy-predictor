@@ -1,6 +1,9 @@
 import React from 'react';
+import { PlayerDetails, DataTableProps } from './types';
 
-const DataTable = ( {data} ) => {
+
+
+const DataTable: React.FC<DataTableProps> = ( {data} ) => {
   return (
     <table style={{ width: '100%', marginTop: '60px' }}>
       <thead>
@@ -13,13 +16,13 @@ const DataTable = ( {data} ) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(item => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.name}</td>
-            <td>{item.position}</td>
-            <td>{item.team}</td>
-            <td>{item.goals}</td>
+      {Object.entries(data).map(([playerId, details]) => (
+          <tr key={playerId}>
+            <td>{playerId}</td>
+            <td>{details.player_name}</td>
+            <td>{details.position}</td>
+            <td>{details.team}</td>
+            <td>{details.goals}</td>
           </tr>
         ))}
       </tbody>
