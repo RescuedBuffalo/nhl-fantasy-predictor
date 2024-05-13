@@ -11,7 +11,7 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://127.0.0.1:5001/fetch_nhl_goal_leaders');
+      const response = await fetch('https://collector-nhl-fantasy-481b97d2ae29.herokuapp.com/fetch_nhl_goal_leaders');
       const jsonData = await response.json();
       setData(jsonData);
       setError('');
