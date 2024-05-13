@@ -29,6 +29,9 @@ jobs:
         cd applications/basic_server
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Build Frontend    
+      run: |  
         cd applications/basic_server/main/frontend
         npm install
         npm run build
