@@ -1,15 +1,27 @@
-# Set the base image
-FROM python:3.12
+# Step 1: Build the React app
+FROM node:22-alpine as build-step
+WORKDIR /app/main/frontend
+COPY main/frontend/package.json ./
+COPY main/frontend/package-lock.json ./
+COPY main/frontend/tsconfig.json ./
+COPY main/frontend/.env ./
+COPY main/frontend/src ./src
+COPY main/frontend/public ./public
+RUN npm install
+RUN npm run build
 
-# Set the working directory in the Docker container
+# Step 2: Build the Flask app
+FROM python:3.12
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r ./requirements.txt
 
-# Copy the rest of the application
-COPY main/flask_app .
+COPY --from=build-step /app/main/frontend/build /app/main/frontend/build
 
-# Command to run on container start
-CMD ["python", "basic_server_app.py"]
+WORKDIR /app/main/
+COPY main/flask_app ./flask_app
+
+WORKDIR /app/main/flask_app
+# Ensure the Flask app listens on Heroku's $PORT
+CMD gunicorn --bind 0.0.0.0:$PORT basic_server_app:app

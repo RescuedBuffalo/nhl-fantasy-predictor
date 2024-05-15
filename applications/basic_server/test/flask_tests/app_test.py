@@ -15,3 +15,6 @@ class TestBasicServer(TestCase):
         response = self.client.get('/')
         # Check if the response code is 200
         assert response.status_code == 200
+
+if __name__ == '__main__':
+    pytest.main()

@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY main/flask_app .
 
 # Command to run on container start
-CMD ["python", "data_collection_app.py"]
+CMD gunicorn --bind 0.0.0.0:$PORT data_collection_app:app
