@@ -11,7 +11,7 @@ ENV REACT_APP_API_URL=$REACT_APP_API_URL
 COPY main/frontend/package.json ./
 COPY main/frontend/package-lock.json ./
 COPY main/frontend/tsconfig.json ./
-COPY main/frontend/.env ./
+
 COPY main/frontend/src ./src
 COPY main/frontend/public ./public
 RUN npm install
