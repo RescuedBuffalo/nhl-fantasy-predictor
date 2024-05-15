@@ -12,7 +12,7 @@ const App = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const baseUrl = process.env.REACT_APP_DATA_COLLECTION_SERVER;
+      const baseUrl = "https://collector-nhl-fantasy-481b97d2ae29.herokuapp.com/";
       const response = await fetch(`${baseUrl}/fetch_nhl_goal_leaders`);
       const jsonData = await response.json();
       setData(jsonData);
