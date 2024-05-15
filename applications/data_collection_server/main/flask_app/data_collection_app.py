@@ -5,6 +5,11 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+# Basic home route
+@app.route('/')
+def home():
+    return "Welcome to the Data Collection Server!"
+
 @app.route('/fetch_nhl_goal_leaders', methods=['GET'])
 def fetch_nhl_goal_leaders():
     url = 'https://api-web.nhle.com/v1/skater-stats-leaders/current'
