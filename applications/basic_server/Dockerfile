@@ -1,6 +1,13 @@
 # Step 1: Build the React app
 FROM node:22-alpine as build-step
 WORKDIR /app/main/frontend
+
+# Use ARG to accept environment variables during the build
+ARG REACT_APP_API_URL
+
+# Set environment variables so that React can embed them in the build
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 COPY main/frontend/package.json ./
 COPY main/frontend/package-lock.json ./
 COPY main/frontend/tsconfig.json ./

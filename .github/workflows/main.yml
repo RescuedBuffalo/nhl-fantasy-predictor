@@ -55,15 +55,10 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '22'
-
     - name: Build and push frontend
       run: |
         cd applications/basic_server
-        docker build -t registry.heroku.com/basic-server-nhl-fantasy/web . --platform linux/amd64
+        docker build -t registry.heroku.com/basic-server-nhl-fantasy/web --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} . --platform linux/amd64
         docker push registry.heroku.com/basic-server-nhl-fantasy/web
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -91,4 +86,3 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_EMAIL: aidan.kosik@colorado.edu
-
