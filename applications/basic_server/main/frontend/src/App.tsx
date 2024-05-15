@@ -23,7 +23,7 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-  };  // This semicolon here ends the definition of fetchData function
+  };
 
   return (
     <div className="App">
