@@ -1,10 +1,11 @@
 # Step 1: Build the React app
 FROM node:22-alpine as build-step
 WORKDIR /app/main/frontend
+
 COPY main/frontend/package.json ./
 COPY main/frontend/package-lock.json ./
 COPY main/frontend/tsconfig.json ./
-COPY main/frontend/.env ./
+
 COPY main/frontend/src ./src
 COPY main/frontend/public ./public
 RUN npm install
