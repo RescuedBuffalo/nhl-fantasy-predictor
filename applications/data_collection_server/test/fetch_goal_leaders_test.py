@@ -36,7 +36,7 @@ class TestFetchGoalLeaders(TestCase):
                 ]
             }
             
-            response, status_code = data_collection_app.fetch_nhl_goal_leaders()
+            response, status_code = data_collection_app.fetch_goal_leaders()
             
             assert status_code == 200
             assert response.json == {

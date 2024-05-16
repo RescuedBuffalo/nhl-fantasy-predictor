@@ -51,13 +51,13 @@ def fetch_nhl_game_logs(player_id, season, game_type):
         game_data = {}
         for game in response.json()['gameLog']:
             data = {}
-            game_id = game['gameId']
+            game_id = str(game['gameId'])
             data['goals'] = game['goals']
             data['assists'] = game['assists']
             data['points'] = game['points']
             data['teamName'] = game['commonName']
             data['teamAbbreviation'] = game['teamAbbrev']
-            data['opponentName'] = game['opponentName']   
+            data['opponentName'] = game['opponentCommonName']   
             data['gameDate'] = game['gameDate']        
             data['plusMinus'] = game['plusMinus']
             data['penaltyMinutes'] = game['pim']
