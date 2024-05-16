@@ -13,7 +13,7 @@ const App = () => {
     try {
       setLoading(true);
       const baseUrl = "https://collector-nhl-fantasy-481b97d2ae29.herokuapp.com/";
-      const response = await fetch(`${baseUrl}/fetch_nhl_goal_leaders`);
+      const response = await fetch(`${baseUrl}/fetch-nhl-goal-leaders`);
       const jsonData = await response.json();
       setData(jsonData);
       setError('');
